@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
-import { View, Text, StyleSheet, Dimensions } from 'react-native';
+import React, { useEffect, useRef } from 'react';
+import { View, Text, StyleSheet, Dimensions, Animated } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
 const { width, height } = Dimensions.get('window');
@@ -7,16 +7,41 @@ const { width, height } = Dimensions.get('window');
 const Splash = () => {
   const navigation = useNavigation();
 
+  const opacity = useRef(new Animated.Value(0)).current; 
+  const scale = useRef(new Animated.Value(0.8)).current;  
+
   useEffect(() => {
+    Animated.timing(opacity, {
+      toValue: 1, 
+      duration: 2000, 
+      useNativeDriver: true,
+    }).start();
+
+    Animated.timing(scale, {
+      toValue: 1, 
+      duration: 2000, 
+      useNativeDriver: true,
+    }).start();
+
     setTimeout(() => {
-      navigation.replace('Login');  
+      navigation.replace('Login');
     }, 3000); 
-  }, [navigation]);
+  }, [navigation, opacity, scale]);
 
   return (
     <View style={styles.container}>
-    
-      <Text style={styles.text}>Quiz App</Text>
+      {/* Animated Text */}
+      <Animated.Text
+        style={[
+          styles.text,
+          {
+            opacity: opacity,  
+            transform: [{ scale: scale }],
+          },
+        ]}
+      >
+        Quiz App
+      </Animated.Text>
     </View>
   );
 };
@@ -28,14 +53,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#2E3B55',  // Customize background color
   },
-  animation: {
-    width: 200,
-    height: 200,
-  },
   text: {
-    fontSize: 24,
+    fontSize: 40,   // Increase font size for better visibility
     color: 'white',
-    marginTop: 20,
     fontWeight: 'bold',
   },
 });

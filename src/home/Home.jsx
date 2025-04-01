@@ -1,19 +1,25 @@
-import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {Button, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import React, {useState} from 'react';
 import AppHeader from '../common/AppHeader';
-import {useSelector} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
+import { clearAuth } from '../redux/userSlice';
+import { useNavigation } from '@react-navigation/native';
 
 const Home = () => {
   const user = useSelector(state => state?.user?.data);
-  const [toggleButton, setToggleButton] = useState('Bonus'); // Track which button is active
-
-  // Toggle button handler
+  const dispatch = useDispatch()
+  const navigation = useNavigation()
+  const [toggleButton, setToggleButton] = useState('Bonus'); 
   const handleToggle = button => {
-    setToggleButton(button); // Set the active button (either 'Bonus' or 'Quiz')
+    setToggleButton(button); 
   };
 
+  const handleLogout = () =>{
+    dispatch(clearAuth())
+    navigation.navigate('Splash')
+  }
   return (
-    <View style={styles.container}>
+    <> <View style={styles.container}>
       <AppHeader onPressBack={false} title={'Home'} />
 
       <View style={styles.buttonContainer}>
@@ -28,17 +34,16 @@ const Home = () => {
         </TouchableOpacity>
 
         <TouchableOpacity
-          onPress={() => handleToggle('Quiz')} // Set 'Quiz' as active
+          onPress={() => handleToggle('Quiz')} 
           style={[
             styles.button,
             toggleButton === 'Quiz' ? styles.buttonActive : {},
-          ]} // Apply active style to 'Quiz'
+          ]} 
         >
           <Text style={styles.buttonText}>Quiz Time</Text>
         </TouchableOpacity>
       </View>
 
-      {/* User Info Section */}
       <View style={[styles.userInfoContainer, {marginTop: 20}]}>
         <Text
           style={[
@@ -59,9 +64,11 @@ const Home = () => {
         <Text style={styles.userInfoText}>{user?.firstName}</Text>
         <Text style={styles.userInfoText}>{user?.rewardPoints}</Text>
       </View>
-      {/* Display the active button */}
       <Text style={styles.activeButtonText}>Active Button: {toggleButton}</Text>
     </View>
+    <Button title='Logout' onPress={handleLogout}/>
+    </>
+   
   );
 };
 
@@ -90,7 +97,7 @@ const styles = StyleSheet.create({
     borderRadius:10
   },
   button: {
-    width: '48%', // Set button width to 48% for both buttons to fit in a row
+    width: '48%', 
     backgroundColor: 'skyblue',
     padding: 15,
     borderRadius: 10,
