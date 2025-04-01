@@ -1,3 +1,60 @@
+===================================================================================================  Backend  ======================================================================================================
+### Project Folder Structure
+
+```
+server/
+│
+├── index.js                # Main entry point for the server
+│
+├── controller/              # Folder containing the controller logic
+│   └── user.js              # User controller
+│
+├── router/                  # Folder containing route definitions
+│   └── user.js              # User routes
+│
+└── Database/                # Folder containing database connection and related logic
+    └── mySql.js             # MySQL database connection setup
+```
+
+### Server Setup
+
+1. **To run the server**, use the following command:
+
+   ```bash
+   npm start
+   ```
+
+   This will start the server on the configured port (usually `4040` by default).
+
+### API Example
+
+The API will be available locally and can be accessed using your system's IP address. Here's an example of how to construct the API URL:
+
+For example, if your system IP is `192.168.93.140`, you can access the `register` endpoint like this:
+
+```
+http://192.168.93.140:4040/register
+```
+
+You can replace `register` with other endpoints as required.
+
+---
+
+### Explanation
+
+- **index.js**: This is the entry point of your server, where the app is initialized and listens for requests.
+- **controller/user.js**: Contains the logic for handling requests related to user operations.
+- **router/user.js**: Defines the routes related to user functionalities and maps them to the appropriate controller functions.
+- **db/db.js**: Manages the connection to your MySQL database.
+
+Make sure to replace `localhost` with your actual system IP address when testing or sharing the API with others on the same network. This allows the API to be accessible from devices other than the one running the server.
+
+--- 
+
+
+======================================================================================================== Frontend =================================================================================================
+
+
 This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
 
 # Getting Started
@@ -27,36 +84,6 @@ With Metro running, open a new terminal window/pane from the root of your React 
 ```sh
 # Using npm
 npm run android
-
-# OR using Yarn
-yarn android
-```
-
-### iOS
-
-For iOS, remember to install CocoaPods dependencies (this only needs to be run on first clone or after updating native deps).
-
-The first time you create a new project, run the Ruby bundler to install CocoaPods itself:
-
-```sh
-bundle install
-```
-
-Then, and every time you update your native dependencies, run:
-
-```sh
-bundle exec pod install
-```
-
-For more information, please visit [CocoaPods Getting Started guide](https://guides.cocoapods.org/using/getting-started.html).
-
-```sh
-# Using npm
-npm run ios
-
-# OR using Yarn
-yarn ios
-```
 
 If everything is set up correctly, you should see your new app running in the Android Emulator, iOS Simulator, or your connected device.
 
