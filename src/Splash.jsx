@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import { View, Text, StyleSheet, Dimensions } from 'react-native';
-import LottieView from 'lottie-react-native';
 import { useNavigation } from '@react-navigation/native';
 
 const { width, height } = Dimensions.get('window');
@@ -9,9 +8,8 @@ const Splash = () => {
   const navigation = useNavigation();
 
   useEffect(() => {
-    // Navigate to the next screen after the splash screen duration
     setTimeout(() => {
-      navigation.replace('Login');  // Replace 'Home' with the name of your main screen
+      navigation.replace('Login');  
     }, 3000); 
   }, [navigation]);
 

@@ -5,13 +5,10 @@ const initialState = {
   data: {},  
 };
 
-export const authSlice = createSlice({
-  name: 'auth',
+export const userSlice = createSlice({
+  name: "user",
   initialState,
   reducers: {
-    storeToken: (state, action) => {
-      state.token = action.payload; 
-    },
     storeLoginRes: (state, action) => {
       state.data = action.payload;  
     },
@@ -22,6 +19,6 @@ export const authSlice = createSlice({
   },
 });
 
-export const { storeToken, storeLoginRes, clearAuth } = authSlice.actions;
+export const { storeLoginRes, clearAuth } = userSlice.actions;
 
-export default authSlice.reducer;
+export default userSlice.reducer;

@@ -2,8 +2,13 @@
 import React, { useState } from 'react';
 import { View, TextInput, Button, Text, StyleSheet } from 'react-native';
 import { loginUser } from './services/api';
+import { useNavigation } from '@react-navigation/native';
+import { useDispatch } from 'react-redux';
+import { storeLoginRes } from './redux/userSlice';
 
-const Login = ({ navigation }) => {
+const Login = () => {
+  const navigation = useNavigation()
+  const dispatch = useDispatch()
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
@@ -16,8 +21,9 @@ const Login = ({ navigation }) => {
     try {
       const result = await loginUser(userData);
       setSuccessMessage(result.message);
-      // Navigate to the home screen or dashboard after successful login
-      navigation.navigate('Home'); // Change 'Home' to whatever screen you'd like
+      console.log("login res : ", result)
+      dispatch(storeLoginRes(result.user))
+      navigation.navigate('TabsApp'); 
     } catch (error) {
       setErrorMessage(error.message);
     }

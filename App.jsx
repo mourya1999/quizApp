@@ -3,9 +3,6 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
 import Home from './src/home/Home';
-import Wallet from './src/Wallet'; // Assuming you have a Wallet component
-import Refer from './src/Refer';   // Assuming you have a Refer component
-import Board from './src/Board';   // Assuming you have a Board component
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Splash from './src/Splash';
 import Register from './src/Register';
@@ -19,7 +16,6 @@ const Tab = createBottomTabNavigator();
 const TabsApp = () => {
   return (
     <Tab.Navigator
-      initialRouteName="Home"
       screenOptions={({ route }) => ({
         tabBarIcon: ({ focused, color, size }) => {
           let iconName;
@@ -37,9 +33,9 @@ const TabsApp = () => {
       })}
     >
       <Tab.Screen name="Home" component={Home} options={{ headerShown: false }} />
-      <Tab.Screen name="Wallet" component={Wallet} options={{ headerShown: false }} />
-      <Tab.Screen name="Refer" component={Refer} options={{ headerShown: false }} />
-      <Tab.Screen name="Board" component={Board} options={{ headerShown: false }} />
+      <Tab.Screen name="Wallet" component={Home} options={{ headerShown: false }} />
+      <Tab.Screen name="Refer" component={Home} options={{ headerShown: false }} />
+      <Tab.Screen name="Board" component={Home} options={{ headerShown: false }} />
     </Tab.Navigator>
   );
 };
